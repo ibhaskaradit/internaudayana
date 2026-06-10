@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSIKOPAL </title>
+    <!-- PSIKOPAL - Developed by Ida Bagus Aditya Bhaskara (All rights reserved) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+        @theme {
+            --color-bg-base: #F0F7FF;
+            --color-panel-dark: #0C2340;
+            --color-panel-hover: #1A365D;
+            --color-accent-blue: #0369a1;
+            --color-accent-teal: #06b6d4;
+            --color-accent-green: #27ae60;
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'DM Sans', system-ui, sans-serif;
+        }
+    </style>
+
+    <style>
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: #F0F7FF;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(6, 182, 212, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(3, 105, 161, 0.08) 0px, transparent 50%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(3, 105, 161, 0.1);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(3, 105, 161, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(3, 105, 161, 0.4); }
+    </style>
+</head>
+<body class="min-height-screen flex flex-col p-3 sm:p-6 text-[#0C2340]">
+
+    <div class="w-full max-w-4xl mx-auto flex-1 flex flex-col mb-12">
+        
+        <header class="text-center mb-6 sm:mb-8 mt-2">
+            <span class="inline-block px-3 py-1 rounded-full bg-blue-100/70 border border-blue-200 text-xs font-semibold uppercase tracking-wider text-[#0369a1] mb-2">
+                Clinical Decision Support Tool
+            </span>
+            <h1 class="font-['DM_Serif_Display'] text-2xl sm:text-4xl text-[#0C2340] tracking-wide leading-tight">
+                Psikosomatik & Paliatif
+            </h1>
+            <p class="text-xs sm:text-sm text-[#2B5281]/70 mt-1">
+                Aplikasi Terintegrasi Penapisan Paliatif Dewasa, HADS, dan PPS/PPI
+            </p>
+        </header>
+
+        <nav class="flex bg-[#0C2340] p-1.5 rounded-2xl shadow-lg mb-6 overflow-x-auto whitespace-nowrap scrollbar-none snap-x">
+            <button class="tab-button flex-1 snap-start px-4 py-3 text-xs sm:text-sm font-bold rounded-xl text-blue-200/70 hover:text-white transition-all active bg-[#0369a1] text-white" onclick="openTab(event, 'tab-penapisan')">
+                PENAPISAN PALIATIF
+            </button>
+            <button class="tab-button flex-1 snap-start px-4 py-3 text-xs sm:text-sm font-bold rounded-xl text-blue-200/70 hover:text-white transition-all ml-1" onclick="openTab(event, 'tab-hads')">
+                SKALA HADS
+            </button>
+            <button class="tab-button flex-1 snap-start px-4 py-3 text-xs sm:text-sm font-bold rounded-xl text-blue-200/70 hover:text-white transition-all ml-1" onclick="openTab(event, 'tab-pps-ppi')">
+                SKALA PPS & PPI
+            </button>
+        </nav>
+
+        <div id="tab-penapisan" class="tab-content active">
+            <div class="glass-card rounded-3xl p-4 sm:p-6 shadow-xl border border-blue-100">
+                <h2 class="font-['DM_Serif_Display'] text-xl sm:text-2xl border-b border-cyan-100 pb-3 mb-6 text-[#0369a1] flex items-center gap-2">
+                    <span>🩺</span> Penapisan Paliatif Dewasa
+                </h2>
+
+                <div class="mb-6">
+                    <div class="flex justify-between items-center bg-blue-50/70 px-4 py-2.5 rounded-xl border border-blue-100/50 mb-3">
+                        <span class="font-bold text-xs sm:text-sm tracking-wide text-[#0C2340]">1. PENYAKIT DASAR</span>
+                        <span class="text-[11px] font-semibold bg-blue-200/60 px-2 py-0.5 rounded text-[#0369a1]">Skor 2 / item</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="2">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Kanker (Metastasis / Rekuren)</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="2">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">PPOK Lanjut</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="2">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Stroke (Penurunan fungsional > 50%)</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="2">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Penyakit Ginjal Kronis</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="2">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Penyakit Jantung Berat (CHF, CAD, LVEF &lt; 25%)</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="2">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">HIV / AIDS</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between items-center bg-blue-50/70 px-4 py-2.5 rounded-xl border border-blue-100/50 mb-3">
+                        <span class="font-bold text-xs sm:text-sm tracking-wide text-[#0C2340]">2. KOMORBIDITAS</span>
+                        <span class="text-[11px] font-semibold bg-blue-200/60 px-2 py-0.5 rounded text-[#0369a1]">Skor 1 / item</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Penyakit Hati Kronis / Ginjal Moderat</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Gagal Jantung Kongestif / PPOK Moderat</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Malnutrisi</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Infeksi Berulang</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Kelainan Jantung / Keterlambatan Perkembangan</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6 p-4 bg-amber-50/50 border border-amber-200/60 rounded-2xl">
+                    <label class="block font-bold text-xs sm:text-sm text-amber-900 mb-2 tracking-wide">3. STATUS FUNGSIONAL (SKOR ECOG)</label>
+                    <select id="ecog_score" class="w-full p-3 text-xs sm:text-sm rounded-xl border border-amber-200 bg-white shadow-xs focus:ring-2 focus:ring-amber-400 outline-none transition-all">
+                        <option value="0">ECOG 0: Aktif Penuh</option>
+                        <option value="1">ECOG 1: Aktivitas Ringan</option>
+                        <option value="2">ECOG 2: Mandiri, Tidak mampu kerja</option>
+                        <option value="3">ECOG 3: Mengurus diri terbatas (>50% Bedridden)</option>
+                        <option value="4">ECOG 4: Benar-benar tidak mampu (Bedridden total)</option>
+                    </select>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex justify-between items-center bg-blue-50/70 px-4 py-2.5 rounded-xl border border-blue-100/50 mb-3">
+                        <span class="font-bold text-xs sm:text-sm tracking-wide text-[#0C2340]">4. KRITERIA LAIN</span>
+                        <span class="text-[11px] font-semibold bg-blue-200/60 px-2 py-0.5 rounded text-[#0369a1]">Skor 1 / item</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Tidak akan menjalani terapi kuratif / Tidak lanjut terapi</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Nyeri tidak teratasi > 24 jam / Keluhan tidak terkontrol</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Kondisi psikologis/spiritual perlu perhatian</span>
+                        </label>
+                        <label class="flex items-start gap-3 p-3 bg-white/60 hover:bg-white rounded-xl border border-gray-100 shadow-xs cursor-pointer transition-all select-none">
+                            <input type="checkbox" class="calc mt-0.5 w-4 h-4 rounded text-[#0369a1]" value="1">
+                            <span class="text-xs sm:text-sm text-[#2B5281]">Rawat RS > 2x dalam sebulan untuk diagnosis sama</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sticky bottom-3 bg-[#0C2340] text-white p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 shadow-xl border border-white/10 mt-8 z-30">
+                    <div class="text-center sm:text-left">
+                        <span class="text-[10px] sm:text-xs font-bold tracking-wider opacity-60 uppercase block">Total Skor Penapisan</span>
+                        <span id="total_display" class="font-['DM_Serif_Display'] text-3xl sm:text-4xl text-green-400 leading-none block mt-1">0</span>
+                    </div>
+                    <div id="status_box" class="w-full sm:w-auto text-center px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wide bg-gray-500 text-white">
+                        Skor &lt; 3: Observasi Rutin
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-hads" class="tab-content">
+            <div class="glass-card rounded-3xl p-4 sm:p-6 shadow-xl border border-blue-100">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-cyan-100 pb-4 mb-5 gap-3">
+                    <h2 class="font-['DM_Serif_Display'] text-xl sm:text-2xl text-[#0369a1] flex items-center gap-2">
+                        <span>🧠</span> Kuesioner HADS <span class="text-xs font-normal text-gray-500 block sm:inline font-sans">(Hospital Anxiety and Depression Scale)</span>
+                    </h2>
+                    
+                    <div class="flex bg-gray-100 p-1 rounded-xl self-start sm:self-auto border border-gray-200">
+                        <button class="btn-role px-4 py-1.5 text-xs font-bold rounded-lg transition-all active bg-[#0369a1] text-white" onclick="switchRole('pasien')">PASIEN</button>
+                        <button class="btn-role px-4 py-1.5 text-xs font-bold rounded-lg transition-all text-gray-500 hover:text-gray-900 ml-1" onclick="switchRole('caregiver')">CAREGIVER</button>
+                    </div>
+                </div>
+
+                <p id="instruction" class="text-xs sm:text-sm italic text-gray-500 bg-gray-50 p-3 rounded-xl border border-gray-100 mb-6">
+                    Pilihlah jawaban yang paling menggambarkan perasaan Anda selama seminggu terakhir.
+                </p>
+
+                <form id="hadsForm" class="space-y-4 mb-8">
+                    <div id="questionsContainer" class="space-y-4"></div>
+                </form>
+
+                <div class="sticky bottom-3 bg-[#0C2340] text-white p-4 sm:p-5 rounded-2xl grid grid-cols-2 gap-4 shadow-xl border border-white/10 z-30">
+                    <div class="text-center border-r border-white/10 pr-2">
+                        <span class="text-[10px] uppercase font-bold tracking-wider opacity-60 block">Ansietas (A)</span>
+                        <span id="scoreA" class="font-['DM_Serif_Display'] text-2xl sm:text-3xl text-cyan-400 block my-1">0</span>
+                        <div id="statusA" class="inline-block px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold bg-green-600 text-white shadow-xs">Normal</div>
+                    </div>
+                    <div class="text-center pl-2">
+                        <span class="text-[10px] uppercase font-bold tracking-wider opacity-60 block">Depresi (D)</span>
+                        <span id="scoreD" class="font-['DM_Serif_Display'] text-2xl sm:text-3xl text-purple-400 block my-1">0</span>
+                        <div id="statusD" class="inline-block px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold bg-green-600 text-white shadow-xs">Normal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-pps-ppi" class="tab-content">
+            <div class="glass-card rounded-3xl p-4 sm:p-6 shadow-xl border border-blue-100">
+                <h2 class="font-['DM_Serif_Display'] text-xl sm:text-2xl border-b border-cyan-100 pb-3 mb-6 text-[#0369a1] flex items-center gap-2">
+                    <span>📊</span> Prognostik Paliatif (PPS & PPI)
+                </h2>
+
+                <div class="mb-6 p-4 sm:p-5 bg-white/60 border border-gray-100 rounded-2xl shadow-xs">
+                    <div class="flex items-center gap-2 text-sm font-bold text-[#0C2340] mb-3">
+                        <span class="w-2 h-2 rounded-full bg-[#0369a1]"></span> PPS (Palliative Performance Scale)
+                    </div>
+                    <label class="block text-xs font-medium text-gray-600 mb-1.5">Tentukan Level PPS Pasien:</label>
+                    <select id="pps" onchange="calculateAllPPS()" class="w-full p-3 text-xs sm:text-sm rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-400 outline-none transition-all">
+                        <option value="100">100% - Ambulasi Penuh, Aktivitas Normal</option>
+                        <option value="90">90% - Ambulasi Penuh, Ada sedikit bukti penyakit</option>
+                        <option value="80">80% - Ambulasi Penuh, Aktivitas normal dengan usaha</option>
+                        <option value="70">70% - Ambulasi Berkurang, Tidak dapat bekerja</option>
+                        <option value="60">60% - Ambulasi Berkurang, Perlu bantuan sesekali</option>
+                        <option value="50">50% - Duduk/Berbaring, Perlu bantuan rutin</option>
+                        <option value="40">40% - Di tempat tidur, Bantuan total, Aktivitas minimal</option>
+                        <option value="30">30% - Di tempat tidur, Bantuan total, Aktivitas total (Bedridden)</option>
+                        <option value="20">20% - Di tempat tidur, Bantuan total, Intake minimal</option>
+                        <option value="10">10% - Di tempat tidur, Bantuan total, Kesadaran koma/maut</option>
+                    </select>
+                    <div class="text-[11px] text-gray-500 mt-2 italic">*Nilai PPS otomatis mengonversi bobot skor untuk kriteria PPI.</div>
+                </div>
+
+                <div class="mb-6 p-4 sm:p-5 bg-white/60 border border-gray-100 rounded-2xl shadow-xs">
+                    <div class="flex items-center gap-2 text-sm font-bold text-[#0C2340] mb-4">
+                        <span class="w-2 h-2 rounded-full bg-cyan-500"></span> PPI (Palliative Prognostic Index)
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Asupan Oral:</label>
+                            <select id="oral" onchange="calculateAllPPS()" class="w-full p-2.5 text-xs rounded-lg border border-gray-200 bg-white focus:ring-2 focus:ring-cyan-400 outline-none">
+                                <option value="0">Normal (Skor 0)</option>
+                                <option value="1">Sedikit Berkurang (Skor 1)</option>
+                                <option value="2.5">Sangat Sedikit (Skor 2.5)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Edema:</label>
+                            <select id="edema" onchange="calculateAllPPS()" class="w-full p-2.5 text-xs rounded-lg border border-gray-200 bg-white focus:ring-2 focus:ring-cyan-400 outline-none">
+                                <option value="0">Tidak Ada (Skor 0)</option>
+                                <option value="1">Ada (Skor 1)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Sesak Napas Saat Istirahat:</label>
+                            <select id="dyspnea" onchange="calculateAllPPS()" class="w-full p-2.5 text-xs rounded-lg border border-gray-200 bg-white focus:ring-2 focus:ring-cyan-400 outline-none">
+                                <option value="0">Tidak Ada (Skor 0)</option>
+                                <option value="3.5">Ada (Skor 3.5)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">Delirium:</label>
+                            <select id="delirium" onchange="calculateAllPPS()" class="w-full p-2.5 text-xs rounded-lg border border-gray-200 bg-white focus:ring-2 focus:ring-cyan-400 outline-none">
+                                <option value="0">Tidak Ada (Skor 0)</option>
+                                <option value="4">Ada (Skor 4)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 border-l-4 border-[#0369a1] p-4 rounded-xl shadow-xs mt-6">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="font-bold text-xs sm:text-sm text-[#0C2340]">TOTAL SKOR PPI:</span>
+                        <span id="ppiScore" class="font-['DM_Serif_Display'] text-2xl sm:text-3xl text-[#0369a1]">0.0</span>
+                    </div>
+                    <div id="interpretation" class="w-full p-3 rounded-lg text-center font-bold text-xs sm:text-sm shadow-inner transition-all">
+                        Menunggu input...
+                    </div>
+                    <div class="text-[10px] text-gray-400 text-center mt-2 italic">(Kalkulasi otomatis terintegrasi sistem PPS)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full text-center py-4 mt-auto border-t border-gray-200/50 text-[10px] tracking-wider text-slate-400 uppercase">
+        Developed by
+        <a href="https://drive.google.com/drive/folders/1uvWonJW4f1BcwNNbvTqeQOltz61NcT9p?usp=drive_link" target="_blank" rel="noopener noreferrer" class="hover:underline">
+                      dr. Ida Bagus Aditya Bhaskara
+                    </a>
+    </footer>
+
+    <script>
+        // --- LOGIKA UTAMA SISTEM NAVIGASI TAB ---
+        function openTab(evt, tabId) {
+            const tabcontents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontents.length; i++) {
+                tabcontents[i].classList.remove("active");
+            }
+
+            const tabbuttons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+                tabbuttons[i].classList.remove("bg-[#0369a1]", "text-white");
+                tabbuttons[i].classList.add("text-blue-200/70");
+            }
+
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active", "bg-[#0369a1]", "text-white");
+            evt.currentTarget.classList.remove("text-blue-200/70");
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- LOGIKA TAB 1: PENAPISAN PALIATIF ---
+        const checkboxes = document.querySelectorAll('.calc');
+        const selectEcog = document.getElementById('ecog_score');
+        const totalDisplay = document.getElementById('total_display');
+        const statusBox = document.getElementById('status_box');
+
+        function calculatePenapisan() {
+            let total = 0;
+            checkboxes.forEach(cb => {
+                if (cb.checked) total += parseInt(cb.value);
+            });
+            total += parseInt(selectEcog.value);
+            totalDisplay.innerText = total;
+
+            if (total >= 3) {
+                statusBox.innerText = "SKOR ≥ 3: PERLU INTERVENSI PALIATIF";
+                statusBox.className = "w-full sm:w-auto text-center px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wide bg-red-600 text-white shadow-md transition-all";
+            } else {
+                statusBox.innerText = "SKOR < 3: OBSERVASI RUTIN";
+                statusBox.className = "w-full sm:w-auto text-center px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wide bg-slate-500 text-white shadow-md transition-all";
+            }
+        }
+        checkboxes.forEach(cb => cb.addEventListener('change', calculatePenapisan));
+        selectEcog.addEventListener('change', calculatePenapisan);
+
+        // --- LOGIKA TAB 2: HADS ---
+        const questions = [
+            { q: "Saya merasa tegang atau 'uring-uringan':", cat: "A", opt: ["Sama sekali tidak", "Kadang-kadang", "Sering kali", "Sebagian besar waktu"], val: [0, 1, 2, 3] },
+            { q: "Saya masih menikmati hal-hal yang biasa saya nikmati:", cat: "D", opt: ["Sama seperti biasanya", "Tidak begitu banyak", "Hanya sedikit", "Hampir tidak sama sekali"], val: [0, 1, 2, 3] },
+            { q: "Saya merasa takut seolah-olah sesuatu yang buruk akan terjadi:", cat: "A", opt: ["Sama sekali tidak", "Sedikit, tapi tidak khawatir", "Ya, tapi tidak terlalu berat", "Ya, sangat kuat"], val: [0, 1, 2, 3] },
+            { q: "Saya dapat tertawa dan melihat sisi lucu dari berbagai hal:", cat: "D", opt: ["Sama seperti biasanya", "Tidak begitu banyak sekarang", "Sangat kurang sekarang", "Sama sekali tidak bisa"], val: [0, 1, 2, 3] },
+            { q: "Pikiran yang mengkhawatirkan muncul di benak saya:", cat: "A", opt: ["Hanya sewaktu-waktu", "Kadang-kadang", "Sering kali", "Sebagian besar waktu"], val: [0, 1, 2, 3] },
+            { q: "Saya merasa ceria:", cat: "D", opt: ["Sebagian besar waktu", "Sering kali", "Kadang-kadang", "Sama sekali tidak"], val: [0, 1, 2, 3] },
+            { q: "Saya dapat duduk tenang dan merasa santai:", cat: "A", opt: ["Pasti", "Biasanya", "Tidak sering", "Sama sekali tidak"], val: [0, 1, 2, 3] },
+            { q: "Saya merasa seolah-olah segalanya melambat:", cat: "D", opt: ["Sama sekali tidak", "Kadang-kadang", "Sering kali", "Hampir setiap saat"], val: [0, 1, 2, 3] },
+            { q: "Saya merasa khawatir di dalam perut (seperti rasa berdebar):", cat: "A", opt: ["Sama sekali tidak", "Kadang-kadang", "Cukup sering", "Sangat sering"], val: [0, 1, 2, 3] },
+            { q: "Saya kehilangan minat pada penampilan saya:", cat: "D", opt: ["Tidak sama sekali", "Saya kurang memperhatikannya", "Saya tidak memperhatikannya sebagaimana mestinya", "Pasti"], val: [0, 1, 2, 3] },
+            { q: "Saya merasa gelisah dan tidak bisa diam:", cat: "A", opt: ["Sama sekali tidak", "Tidak terlalu banyak", "Cukup banyak", "Sangat banyak"], val: [0, 1, 2, 3] },
+            { q: "Saya menantikan hal-hal dengan rasa senang:", cat: "D", opt: ["Sama seperti biasanya", "Kurang dari biasanya", "Jauh kurang dari biasanya", "Hampir tidak sama sekali"], val: [0, 1, 2, 3] },
+            { q: "Saya tiba-tiba merasa panik:", cat: "A", opt: ["Sama sekali tidak", "Tidak terlalu sering", "Cukup sering", "Sangat sering"], val: [0, 1, 2, 3] },
+            { q: "Saya dapat menikmati buku, program TV atau radio:", cat: "D", opt: ["Sering kali", "Kadang-kadang", "Tidak sering", "Hampir tidak sama sekali"], val: [0, 1, 2, 3] }
+        ];
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = questions.map((q, i) => `
+                <div class="p-4 bg-white/50 border border-gray-100 rounded-2xl shadow-xs transition-all hover:border-blue-200 hover:bg-white">
+                    <span class="text-xs sm:text-sm font-semibold text-[#0C2340] mb-3 block leading-snug">${i+1}. ${q.q}</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        ${q.opt.map((o, idx) => `
+                            <label class="flex items-center gap-2.5 p-2.5 border border-gray-200/70 rounded-xl cursor-pointer text-xs hover:bg-blue-50/50 transition-all select-none">
+                                <input type="radio" name="q${i}" value="${q.val[idx]}" onchange="calculateHADS()" class="w-3.5 h-3.5 text-[#0369a1]">
+                                <span class="text-gray-700">${o}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function calculateHADS() {
+            let scoreA = 0, scoreD = 0;
+            questions.forEach((q, i) => {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    if (q.cat === "A") scoreA += parseInt(selected.value);
+                    else scoreD += parseInt(selected.value);
+                }
+            });
+
+            document.getElementById('scoreA').innerText = scoreA;
+            document.getElementById('scoreD').innerText = scoreD;
+            
+            updateHADSStatus('statusA', scoreA);
+            updateHADSStatus('statusD', scoreD);
+        }
+
+        function updateHADSStatus(id, score) {
+            const el = document.getElementById(id);
+            if (score <= 7) { el.innerText = "Normal"; el.className = "inline-block px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold bg-green-600 text-white shadow-xs"; }
+            else if (score <= 10) { el.innerText = "Borderline"; el.className = "inline-block px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold bg-amber-500 text-white shadow-xs"; }
+            else { el.innerText = "Abnormal"; el.className = "inline-block px-3 py-0.5 rounded-full text-[10px] sm:text-xs font-bold bg-red-600 text-white shadow-xs"; }
+        }
+
+        function switchRole(role) {
+            document.querySelectorAll('.btn-role').forEach(btn => {
+                btn.classList.remove('bg-[#0369a1]', 'text-white');
+                btn.classList.add('text-gray-500', 'hover:text-gray-900');
+            });
+            if(event) {
+                event.currentTarget.classList.add('bg-[#0369a1]', 'text-white');
+                event.currentTarget.classList.remove('text-gray-500', 'hover:text-gray-900');
+            }
+            document.getElementById('hadsForm').reset();
+            calculateHADS();
+        }
+
+        // --- LOGIKA TAB 3: PPS & PPI ---
+        function calculateAllPPS() {
+            const ppsVal = parseInt(document.getElementById('pps').value);
+            let ppsPpiScore = 0;
+
+            if (ppsVal >= 60) {
+                ppsPpiScore = 0;
+            } else if (ppsVal >= 30 && ppsVal <= 50) {
+                ppsPpiScore = 2.5;
+            } else if (ppsVal <= 20) {
+                ppsPpiScore = 4;
+            }
+
+            const oral = parseFloat(document.getElementById('oral').value);
+            const edema = parseFloat(document.getElementById('edema').value);
+            const dyspnea = parseFloat(document.getElementById('dyspnea').value);
+            const delirium = parseFloat(document.getElementById('delirium').value);
+
+            const totalPpi = ppsPpiScore + oral + edema + dyspnea + delirium;
+            document.getElementById('ppiScore').innerText = totalPpi.toFixed(1);
+
+            const interpDiv = document.getElementById('interpretation');
+            if (totalPpi <= 4) {
+                interpDiv.innerText = "Group A: Survival > 6 Minggu";
+                interpDiv.className = "w-full p-3 rounded-lg text-center font-bold text-xs sm:text-sm bg-green-100 text-green-800 border border-green-200 transition-all shadow-inner";
+            } else if (totalPpi <= 6) {
+                interpDiv.innerText = "Group B: Survival 3 - 6 Minggu";
+                interpDiv.className = "w-full p-3 rounded-lg text-center font-bold text-xs sm:text-sm bg-amber-100 text-amber-800 border border-amber-200 transition-all shadow-inner";
+            } else {
+                interpDiv.innerText = "Group C: Survival < 3 Minggu";
+                interpDiv.className = "w-full p-3 rounded-lg text-center font-bold text-xs sm:text-sm bg-red-100 text-red-800 border border-red-200 transition-all shadow-inner";
+            }
+        }
+
+        // --- GLOBAL INITIAL RUN ---
+        calculatePenapisan();
+        renderQuestions();
+        calculateHADS();
+        calculateAllPPS();
+    </script>
+</body>
+</html>
